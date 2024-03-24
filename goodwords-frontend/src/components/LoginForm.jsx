@@ -9,15 +9,13 @@ function LoginForm() {
   const [password, setPassword] = useState("");
   const [loginUser, { data, loading, error }] = useLazyQuery(LOGIN_USER, {
     onCompleted: (data) => {
-      // Assuming the JWT is returned directly
       console.log("Login successful", data.loginUser);
-      // Here you might want to store the token, and then navigate
+      // Need to store the token, and then navigate
       // localStorage.setItem('token', data.loginUser);
       // navigate('/dashboard'); // Navigate to the dashboard or relevant page
     },
     onError: (error) => {
       console.error("Login error", error);
-      // Here you can set state to show error messages if needed
     },
   });
 
