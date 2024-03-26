@@ -44,6 +44,7 @@ const typeDefs = gql`
 
   type Query {
     loginUser(email: String!, password: String!): String
+    categories: [Category!]! # Query to fetch all categories
   }
 
   type Mutation {
