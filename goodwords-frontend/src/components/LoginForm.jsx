@@ -7,12 +7,12 @@ function LoginForm() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loginUser, { data, loading, error }] = useLazyQuery(LOGIN_USER, {
+  const [loginUser, { loading, data }] = useLazyQuery(LOGIN_USER, {
     onCompleted: (data) => {
       console.log("Login successful", data.loginUser);
-      // Need to store the token, and then navigate
-      // localStorage.setItem('token', data.loginUser);
-      // navigate('/dashboard'); // Navigate to the dashboard or relevant page
+      // Store the token in localStorage
+      localStorage.setItem("token", data.loginUser.token);
+      navigate("/dashboard");
     },
     onError: (error) => {
       console.error("Login error", error);
@@ -42,6 +42,7 @@ function LoginForm() {
         <button onClick={handleLogin} disabled={loading}>
           LOGIN
         </button>
+        {data && <div>Login successful! Redirecting to dashboard...</div>}
         <div>
           Don't have an account?{" "}
           <span

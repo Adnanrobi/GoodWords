@@ -13,9 +13,8 @@ const RegistrationForm = () => {
   const navigate = useNavigate();
   const [step, setStep] = useState(0);
   const [confirmPassword, setConfirmPassword] = useState("");
-  const { registrationData, setRegistrationData } =
-    useContext(RegistrationContext);
-  const [registerUser, { loading, error }] = useMutation(REGISTER_USER, {
+  const { registrationData } = useContext(RegistrationContext);
+  const [registerUser, { loading, error, data }] = useMutation(REGISTER_USER, {
     onCompleted: (data) => {
       console.log("Registration successful", data.registerUser);
       navigate("/login");
@@ -58,6 +57,7 @@ const RegistrationForm = () => {
           {step === stepComponents.length - 1 ? "SIGN UP" : "NEXT"}
         </button>
         {error && <div>Error: {error.message}</div>}
+        {data && <div>Registration successful! Please proceed to login.</div>}
         <div>
           Already have an account?{" "}
           <span className="form-switch-link" onClick={() => navigate("/login")}>
