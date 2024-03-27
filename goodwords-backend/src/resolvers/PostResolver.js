@@ -10,8 +10,6 @@ const PostResolver = {
       if (!context.user) {
         throw new AuthenticationError("You must be logged in to create a post");
       }
-
-      // Continue with creating the post
       const post = await prisma.post.create({
         data: {
           title,
@@ -27,12 +25,10 @@ const PostResolver = {
     },
 
     updatePost: async (_, { postId, title, content, categoryIds }, context) => {
-      // Check if user is authenticated
       if (!context.user) {
         throw new AuthenticationError("You must be logged in to update a post");
       }
 
-      // Continue with updating the post
       const post = await prisma.post.update({
         where: { id: postId },
         data: {
@@ -48,12 +44,10 @@ const PostResolver = {
     },
 
     deletePost: async (_, { postId }, context) => {
-      // Check if user is authenticated
       if (!context.user) {
         throw new AuthenticationError("You must be logged in to delete a post");
       }
 
-      // Continue with deleting the post
       const post = await prisma.post.delete({
         where: { id: postId },
       });
